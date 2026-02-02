@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .nut {
+        width: 80px;
+        height: 35px;
+        background: cadetblue;
+        border-radius: 999px;
+        color: white;
+        font-weight: bold;
+        font-size: 14pt;
+        border: none;
+        cursor: pointer; /*hiện tay khi lia chuột */
+        position: absolute;
+        right: 20px;
+        top: 20px;
+      }
+      .nut:hover {
+        background: teal;
+      }
+      .nut:active {
+        transform: scale(0.95);
+      }
+    </style>
+  </head>
+  <body>
+    <button class="nut" onclick="location.href = 'login.html'">Sign</button>
+  </body>
+</html>
