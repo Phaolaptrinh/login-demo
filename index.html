@@ -3,31 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      .nut {
-        width: 80px;
-        height: 35px;
-        background: cadetblue;
-        border-radius: 999px;
-        color: white;
-        font-weight: bold;
-        font-size: 14pt;
-        border: none;
-        cursor: pointer; /*hiện tay khi lia chuột */
-        position: absolute;
-        right: 20px;
-        top: 20px;
-      }
-      .nut:hover {
-        background: teal;
-      }
-      .nut:active {
-        transform: scale(0.95);
-      }
-    </style>
+    <title>AuthFlow • Smart Login Demo</title>
+    <meta name="description" content="Modern authentication demo with login, signup, validation, theme switcher and profile session." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <button class="nut" onclick="location.href = 'login.html'">Sign</button>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="AuthFlow Home">
+        <span class="brand-logo">A</span>
+        <span>AuthFlow</span>
+      </a>
+      <nav class="header-actions">
+        <button id="themeToggle" class="btn ghost" type="button" aria-label="Toggle dark mode">🌓 Theme</button>
+        <a href="login.html" class="btn primary">Get Started</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <section>
+        <p class="eyebrow">Modern starter</p>
+        <h1>Upgrade your login project to production-ready UX.</h1>
+        <p class="lead">
+          Includes sign in, sign up, remember me, inline validation, password visibility,
+          dark mode persistence, mock session, and profile dashboard.
+        </p>
+        <div class="hero-cta">
+          <a href="login.html" class="btn primary">Open Auth App</a>
+          <a href="login.html#signup" class="btn secondary">Create Account</a>
+        </div>
+      </section>
+      <aside class="feature-card" aria-label="Feature checklist">
+        <h2>Included features</h2>
+        <ul>
+          <li>Accessible form controls + keyboard focus</li>
+          <li>Client-side validation and error states</li>
+          <li>Secure password rules and visibility toggle</li>
+          <li>Session restore and remember me</li>
+          <li>Responsive, mobile-first UI</li>
+        </ul>
+      </aside>
+    </main>
+
+    <script src="app.js" defer></script>
   </body>
 </html>
