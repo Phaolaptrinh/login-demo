@@ -1,43 +1,210 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <style>
+      :root {
+        --bg-1: #0f172a;
+        --bg-2: #1e293b;
+        --surface: #ffffff;
+        --primary: #06b6d4;
+        --primary-hover: #0891b2;
+        --danger: #ef4444;
+        --ok: #16a34a;
+        --text: #0f172a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
+        margin: 0;
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        font-family: Arial;
+        font-family: Inter, Arial, sans-serif;
+        background: linear-gradient(140deg, var(--bg-1), var(--bg-2));
       }
+
       .login-box {
-        width: 300px;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
+        width: min(92vw, 360px);
+        padding: 26px;
+        border-radius: 16px;
+        background: var(--surface);
+        box-shadow: 0 14px 40px rgba(2, 6, 23, 0.35);
       }
+
+      h3 {
+        margin: 0 0 8px;
+        color: var(--text);
+      }
+
+      .sub {
+        margin: 0 0 18px;
+        color: #475569;
+        font-size: 0.92rem;
+      }
+
+      .field {
+        margin-bottom: 12px;
+      }
+
+      label {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 6px;
+      }
+
       input {
         width: 100%;
-        margin: 10px -8px;
-        padding: 8px;
+        padding: 11px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        outline: none;
       }
+
+      input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.18);
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 8px 0 14px;
+      }
+
+      .row label {
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+      }
+
+      .row input[type='checkbox'] {
+        width: auto;
+      }
+
+      .forgot {
+        font-size: 0.86rem;
+        color: #0ea5e9;
+        text-decoration: none;
+      }
+
       button {
         width: 100%;
-        padding: 10px;
+        padding: 11px;
         border-radius: 999px;
         border: none;
-        background: cadetblue;
+        background: var(--primary);
         color: white;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: var(--primary-hover);
+      }
+
+      #message {
+        margin-top: 12px;
+        min-height: 22px;
+        font-size: 0.9rem;
+      }
+
+      .error {
+        color: var(--danger);
+      }
+
+      .success {
+        color: var(--ok);
       }
     </style>
   </head>
   <body>
-    <div class="login-box">
-      <h3>Login</h3>
-      <input type="text" placeholder="Username" />
-      <input type="password" placeholder="Password" />
-      <button>Login</button>
-    </div>
+    <form class="login-box" id="loginForm" novalidate>
+      <h3>Đăng nhập</h3>
+      <p class="sub">Nhập tài khoản và mật khẩu để tiếp tục.</p>
+
+      <div class="field">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="vd: nguyenvana" autocomplete="username" required />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="ít nhất 6 ký tự"
+          autocomplete="current-password"
+          required
+          minlength="6"
+        />
+      </div>
+
+      <div class="row">
+        <label><input type="checkbox" id="remember" /> Nhớ tài khoản</label>
+        <a class="forgot" href="#">Quên mật khẩu?</a>
+      </div>
+
+      <button type="submit">Login</button>
+      <div id="message" aria-live="polite"></div>
+    </form>
+
+    <script>
+      const form = document.getElementById('loginForm');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const rememberInput = document.getElementById('remember');
+      const message = document.getElementById('message');
+
+      const savedUser = localStorage.getItem('savedUsername');
+      if (savedUser) {
+        usernameInput.value = savedUser;
+        rememberInput.checked = true;
+      }
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        message.className = '';
+
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+
+        if (!username) {
+          message.textContent = 'Vui lòng nhập username.';
+          message.classList.add('error');
+          usernameInput.focus();
+          return;
+        }
+
+        if (password.length < 6) {
+          message.textContent = 'Mật khẩu phải có ít nhất 6 ký tự.';
+          message.classList.add('error');
+          passwordInput.focus();
+          return;
+        }
+
+        if (rememberInput.checked) {
+          localStorage.setItem('savedUsername', username);
+        } else {
+          localStorage.removeItem('savedUsername');
+        }
+
+        message.textContent = `Đăng nhập thành công. Xin chào, ${username}!`;
+        message.classList.add('success');
+        form.reset();
+      });
+    </script>
   </body>
 </html>
