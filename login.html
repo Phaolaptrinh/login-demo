@@ -2,42 +2,81 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Login</title>
-    <style>
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-family: Arial;
-      }
-      .login-box {
-        width: 300px;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-      }
-      input {
-        width: 100%;
-        margin: 10px -8px;
-        padding: 8px;
-      }
-      button {
-        width: 100%;
-        padding: 10px;
-        border-radius: 999px;
-        border: none;
-        background: cadetblue;
-        color: white;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AuthFlow • Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <div class="login-box">
-      <h3>Login</h3>
-      <input type="text" placeholder="Username" />
-      <input type="password" placeholder="Password" />
-      <button>Login</button>
-    </div>
+  <body class="auth-page">
+    <header class="site-header compact">
+      <a class="brand" href="index.html">
+        <span class="brand-logo">A</span>
+        <span>AuthFlow</span>
+      </a>
+      <button id="themeToggle" class="btn ghost" type="button" aria-label="Toggle dark mode">🌓 Theme</button>
+    </header>
+
+    <main class="auth-shell">
+      <section class="auth-card">
+        <div class="tab-row" role="tablist" aria-label="Authentication tabs">
+          <button class="tab active" id="tab-login" data-tab="login" role="tab" aria-selected="true">Sign in</button>
+          <button class="tab" id="tab-signup" data-tab="signup" role="tab" aria-selected="false">Create account</button>
+        </div>
+
+        <form id="loginForm" class="form active" novalidate>
+          <h1>Welcome back 👋</h1>
+          <p class="muted">Sign in to continue to your dashboard.</p>
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+          <small class="error" data-for="loginEmail"></small>
+
+          <label for="loginPassword">Password</label>
+          <div class="input-group">
+            <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required />
+            <button class="icon-btn" type="button" data-toggle-password="loginPassword">👁️</button>
+          </div>
+          <small class="error" data-for="loginPassword"></small>
+
+          <label class="checkbox-row">
+            <input id="rememberMe" type="checkbox" />
+            <span>Remember me on this device</span>
+          </label>
+
+          <button class="btn primary full" type="submit">Sign in</button>
+          <p class="hint">Demo account: <strong>demo@authflow.dev</strong> / <strong>Demo@123</strong></p>
+        </form>
+
+        <form id="signupForm" class="form" novalidate>
+          <h1>Create account ✨</h1>
+          <p class="muted">Join in less than a minute.</p>
+          <label for="signupName">Full name</label>
+          <input id="signupName" name="name" type="text" autocomplete="name" placeholder="Jane Doe" required />
+          <small class="error" data-for="signupName"></small>
+
+          <label for="signupEmail">Email</label>
+          <input id="signupEmail" name="email" type="email" autocomplete="email" placeholder="jane@example.com" required />
+          <small class="error" data-for="signupEmail"></small>
+
+          <label for="signupPassword">Password</label>
+          <div class="input-group">
+            <input id="signupPassword" name="password" type="password" autocomplete="new-password" placeholder="Min 8 chars, 1 uppercase, 1 number" required />
+            <button class="icon-btn" type="button" data-toggle-password="signupPassword">👁️</button>
+          </div>
+          <small class="error" data-for="signupPassword"></small>
+
+          <button class="btn primary full" type="submit">Create account</button>
+        </form>
+
+        <div id="profilePanel" class="profile-panel" hidden>
+          <h1>You're signed in ✅</h1>
+          <p id="welcomeText"></p>
+          <button id="logoutBtn" class="btn secondary full" type="button">Sign out</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js" defer></script>
   </body>
 </html>
